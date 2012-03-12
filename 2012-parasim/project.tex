@@ -41,33 +41,42 @@ architektury, jež by umožňovala budoucí vývoj a testování optimalizace a 
 
 \section{Cíle}
 \begin{enumerate}
-\item   V~současné době je projekt složen z~většího množství samostatných modulů,
-        implementujících některé funkce výsledného nástroje. Tyto moduly vznikly
-        na základě \cite{drazan_master}, kde byla prezentována základní myšlenka
-        uvažované metody pro analýzu dynamických systémů, která je rozšířena o~přístup
-        prezentován v~\cite{odkaz na popis robustnosti}. Největší pozornost je přitom
-        věnována simulaci chování a monitoringu. Tyto části se jeví být výpočetně
-        nejvíce náročné a možný způsob jejich optimalizace je již nastíněn v~\cite{papousek_bachelor}
-        a \cite{kovacik_bachelor}. Jistý pokrok již byl učiněn i v~zadávání temporálních
-        vlastností~\cite{vejpustek_bachelor} použitých v~rámci analýzy.
 
+\item   Řešená úloha je ověření, za jakých iniciálních podmínek splňuje
+        dynamický systém danou temporálních vlastnost. Výchozím bodem je algoritmus
+        prezentovaný v \cite{drazan_master} a dále rozšířen na základě \cite{robustness}.
+
+        Problém byl rozdělen na podúkoly a jim příslušné moduly:
+        \begin{enumerate}
+            \item   simulace systému diferenciálních rovnic,
+            \item   detekce cyklu,
+            \item   monitoring temporální vlastnosti,
+            \item   určování vzdálenosti mezi trajektoriemi chování,
+            \item   zahušťování prostoru iniciálních podmínek.
+        \end{enumerate}
+
+        Největší pozornost byla do této doby věnována modulům (a) a (c). Ty se jeví
+        být výpočetně nejnáročnější a možný způsob jejich optimalizace byl nastíněn
+        v \cite{papousek_bachelor} a \cite{kovacik_bachelor}. Je možné také navázat
+        na vizuální zadávání temporálních vlastností prezentované v \cite{vejpustek_bachelor}.
+        
         Aktuální stav je již nyní možné sledovat na \url{https://github.com/sybila/parasim}.
 
 \item   Projekt si klade za úkol vytvořit nástroj pro analýzu dynamických systémů
-        pocházejích zejména z oblasti biologie.
+        pocházejících zejména z oblasti biologie.
 
         Již existující samostatné moduly je nutné integrovat a rozšířit o další
-        nutnou funkcionalitu (načítání modelu a vlastností, vizualizace napočítaných
+        funkcionalitu (načítání modelu a vlastností, vizualizace napočítaných
         výsledků a exportování výsledků do souboru). Do budoucna se počítá s~dalšími
         algoritmy pro analýzu dynamických systémů, a proto návrh a implementace
         architektury umožní integrovat další rozšíření. To otevře prostor pro účast
         třetích stran na vývoji.
 
-        V první verzi bude mít nástroj pouze rozhraní z příkazové řádky. Pro zvýšení
-        přístupnosti však musí nástroj obsah i grafické uživatelské rozhraní. Není
-        v~plánu vytvořit editor modelů (takové nástroje jsou již k~dispozici),
-        avšak je pravděpodobné, že bude obsah editor temporálních vlastností~\cite{vejpustek_bachelor}. 
-        Klíčovou součástí grafického rozhraní jsou:
+        V první verzi bude mít nástroj pouze rozhraní z příkazového řádku. Pro zvýšení
+        přístupnosti však musí nástroj nabídnout i grafické uživatelské rozhraní. Není
+        v~plánu vytvořit editor modelů (takové nástroje jsou již k~dispozici, např. Copasi, CellDesigner),
+        avšak je pravděpodobné, že bude obsahovat editor temporálních vlastností. 
+        Klíčovými součástmi grafického rozhraní jsou:
         \begin{itemize}
             \item   zobrazení výsledků analýzy,
             \item   sdružení a správa modelů, vlastností a výsledků.
@@ -75,41 +84,20 @@ architektury, jež by umožňovala budoucí vývoj a testování optimalizace a 
 
         Po úspěšné integraci jednotlivých modulů bude nutné se zaměřit na akceleraci
         výpočtu. Na základě naměřených dat se rozhodne, zda se bude akcelerovat
-        nějaký z~modulů samostatně např. za použití technologie CUDA~\cite{cuda_doc},
+        nějaký z~modulů samostatně např. za použití technologie CUDA,
         nebo zda se výpočet bude spouštět v distribuovaném prostředí např. pomocí frameworku
-        Hadoop~\cite{hadoop_book}.
+        Hadoop.
 
         Aby bylo podpořeno rozšíření mezi potenciální uživatele, bude nástroj
-        umístěn na \cite{parasim_web} a doplněn o~uživatelskou dokumantací a tutorialem.
-        Program bude licencován pod \emph{[GNU GPL/Apache License]}, jejíž volnost
+        umístěn na \url{https://github.com/sybila/parasim} a doplněn o~uživatelskou
+        dokumantaci a tutoriál.
+        Program bude licencován pod GNU GPL, jejíž volnost
         by měla podpořit rozšiřování nástroje třetí stranou.
-
-%\item Projekt si klade za úkol vytvořit fungující nástroj určený pro analýzu dynamických systémů, který který bude cílen především na uživatele-neinformatiky.
-%
-%	Jednotlivé samostatné moduly je nutné integrovat a doplnit o~další funkcionalitu \emph{[moduly]} nutnou pro základní činnost nástroje (například načítání
-%	vstupů). Protože se v~budoucnu počítá s~rozšířeními \emph{[zopakovat to, co Sven na začátku?]}, jeví se vhodné navrhnout a implementovat architekturu, která umožní
-%	jednoduchou a standardizovanou integraci další funkcionality. To zároveň umožní účast třetí strany na jejím vývoji.
-%
-%	Aby mohl být nástroj používán i neinformatiky, je jeho nutnou součásti grafické uživatelské rozhraní (GUI). Projekt si neklade za cíl implementovat editor modelů
-%	nebo temporálních 	vlasností \emph{[sic]}, což by neodpovídalo jeho zaměření na analýzu. Navíc již řada grafických editorů existuje. Klíčové je však přehledné
-%	nastavení analýzy a zobrazení jejích výsledků. Zároveň by nástroj mohl sdružovat vstupy, se kterými uživatel pracuje, stejně jako výsledky jeho práce.
-%	\emph{[mohl by -- proboha -- tak bude sdružovat nebo ne? celkově -- spíše \uv{bude umět}, nebo \uv{měl by umět}?]} Protože architektura nástroje je modulární,
-%	mělo by i GUI počítat s možností zavedení dalších rozšíření. \emph{[tak a teď si nejsem jistý, jestli tohle fakt chci dělat a jestli to bude nutné; dále viz výše]}
-%
-%	\emph{[Ten konec možná postavit jinak -- podle Papiho vize -- že modulární GUI nebude třeba. Ale pak se musí zapsat i na začátek.]}
-%
-%	Výsledný nástroj bude schopný provést simulaci dynamického systému a analyzovat jej na základě monitoringu temporálních vlastností. Další funkcionalitu bude přitom
-%	jednouché zavést na základě architektury jeho jádra. Grafické rozhraní bude uschovávat množinu možných vstupů analýzy (modelů, temporálních vlastností, počátečních podmínek, etc.),
-%	které bude moci uživatel vybrat a spustit na jejich základě analýzu, jejíž výsledek nástroj zobrazí a uchová pro další referenci.
-%
-%	Aby bylo podpořeno rozšíření mezi potenciální uživatele, bude nástroj umístěn na \emph{[kde -- jen github a nebo sourceforge?]} a doplněn \emph{[alespoň základní?]} uživatelskou %%dokumentací
-%	a tutorialem. Program bude licencován pod \emph{[GNU GPL/Apache License]}, jejíž volnost by měla podpořit rozšiřování nástroje třetí stranou. \emph{[tady to je stylově trochu %zvláštní]}
-
-%	\emph{GUI pro extenze? Nebo je to spíše programátorská záležitost?}
 
 \item\begin{enumerate}
 	\item duben, květen\\
-		Základní náplní bude integrace a dopisování modulů. Výstupem by měl být prototyp nástroje spustitelný z~příkazového řádku.
+		Základní pracovní náplní bude integrace a dopisování modulů. Výstupem bude
+        prototyp nástroje spustitelný z~příkazového řádku.
         \begin{itemize}
             \item   Jan Papoušek -- integrace modulů, vizualizace výsledků
             \item   Tomáš Vejpustek -- načítání vstupů, reprezentace dat, exportování výsledků
@@ -119,16 +107,19 @@ architektury, jež by umožňovala budoucí vývoj a testování optimalizace a 
 		Zároveň bude vytvořena dokumentace prototypu ve formě manuálové stránky s~příklady použití.
         \begin{itemize}
             \item   Jan Papoušek -- profilování, dokumentace
-            \item   Tomáš Vejpustek -- testování, dokumentace
+            \item   Tomáš Vejpustek -- testy, dokumentace
         \end{itemize}
-	\item srpen, září, říjen\\ \emph{[tady je otázka, jestli to napsat každému zvlášť nebo to spojit]}
-		Bude věnována návrhu a implementaci GUI. To by mělo na konci etapy vykazovat většinu navrhované funkcionality.
+	\item srpen, září, říjen\\
+		Třetí etapa bude věnována návrhu a implementaci GUI společně s optimalizací časově
+        náročných častí výpočtu. Optimalizace bude přitom vycházet z výsledků profilování.
+        Na konci etapy bude nástroj vykazovat většinu navrhované funkcionality.
         \begin{itemize}
-            \item   Jan Papoušek -- optimalizace výpočtu
+            \item   Jan Papoušek -- návrh optimalizace výpočtu a její implementace
             \item   Tomáš Vejpustek -- návrh a implementace GUI
         \end{itemize}
 	\item listopad, prosinec\\
-		Proběhne testování a dokončování grafického rozhraní. Zároveň bude vytvořena jeho uživatelská dokumentace a tutorial.
+		Proběhne vyhodnocení optimalizace, testování a dokončování nástroje.
+        Zároveň bude vytvořena uživatelská dokumentace.
         \begin{itemize}
             \item   Jan Papoušek -- testy, další profilování, dokumentace
             \item   Tomáš Vejpustek -- testy, dokončení GUI, dokumentace

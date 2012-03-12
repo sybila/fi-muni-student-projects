@@ -1,0 +1,12 @@
+The goal of this project is a tool for analysis of dynamic systems specified
+in terms of ordinary differential equations.
+
+As a feature distinct from existing tools used for dynamic systems analysis
+and temporal properties monitoring,
+
+this [our] tool will be based on a modular architecture,
+
+which should greatly facilitate future optimalization and parallelization of individual
+modules and algorithms used for analysis,
+
+as well as implementation of additional functionality.

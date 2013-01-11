@@ -1,0 +1,10 @@
+-> vytvořili jsme aplikaci pro analýzu dynamických systémů
+-> aplikace je modulární => ...
+-> máme CLI i GUI
+	-> zobrazení výsledků
+	-> správa modelů, vlastností, ...
+-> aplikace příjímá vstup ze SBML => kompatibilita
+-> akcelerace výpočtu
+	-> sdílená paměť, paralelní -- stojí za tím nějaké rozhodnutí
+	-> další akcelerace bude následovat
+-> nástroj je volně ke stažení a má dokumentaci
